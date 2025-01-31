@@ -49,7 +49,7 @@ const RegisterForm = () => {
     lastName: Yup.string().required("Last name is required"),
     nationality: Yup.string().required("Nationality is required"),
     phone: Yup.string(),
-    email: Yup.string(),
+    email: Yup.string().email(),
     location: Yup.string().required("Location is required"),
     businessType: Yup.string().required("Business type is required"),
     companyName: Yup.string().required("Company name is required"),
@@ -91,22 +91,44 @@ const RegisterForm = () => {
         passport: formData.applicantCitizenship === "Foreigner" ? formData.passport : null,
       };
 
-      const response = await axios.post("http://localhost:5000/users/register", user);
+      const response = await axios.post("http://localhost:5000/permits/register", user);
       console.log(response.data);
       message.success("Product registered successfully");
 
       // Send welcome email using EmailJS
       const emailParams = {
-        user_email: formData.email,
-        user_name: `${formData.firstName} ${formData.lastName}`,
+        user_email: formData.email, // Recipient email
+        user_name: `${formData.firstName} ${formData.lastName}`, // User's full name
+        applicantCitizenship: formData.applicantCitizenship,
+        id_doc_number: formData.id_doc_number,
+        passport: formData.passport,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        nationality: formData.nationality,
+        phone: formData.phone,
+        email: formData.email,
+        location: formData.location,
+        businessType: formData.businessType,
+        companyName: formData.companyName,
+        tinNumber: formData.tinNumber,
+        registrationDate: formData.registrationDate,
+        businessLocation: formData.businessLocation,
+        purposeOfImport: formData.purposeOfImport,
+        specifyPurposeOfImport: formData.specifyPurposeOfImport,
+        prodCategory: formData.prodCategory,
+        productName: formData.productName,
+        weight: formData.weight,
+        descriptions: formData.descriptions,
+        unitOfMeasure: formData.unitOfMeasure,
+        quantity: formData.quantity,
       };
-
+      
       emailjs
         .send(
-          "service_8tpno95",
-          "template_4fphvvn",
-          emailParams,
-          "1xLQwoFz0BPxvmsnL"
+          "service_8tpno95", // Your EmailJS service ID
+          "template_4fphvvn", // Your EmailJS template ID
+          emailParams, // Payload containing all form data
+          "1xLQwoFz0BPxvmsnL" // Your EmailJS user ID
         )
         .then(() => {
           console.log("Email sent successfully!");
@@ -177,7 +199,7 @@ const RegisterForm = () => {
                     />
                   </div>
                 )}
-
+                
                 <div className="flex flex-col text-sm w-full mb-4">
                   <label htmlFor="firstName">Other names*</label>
                   <input
@@ -209,7 +231,7 @@ const RegisterForm = () => {
                 priorityOptions={["RW", "UG", "TZ", "KE"]} // Optional: Prioritize specific countries
               />
             </div>
-
+            <div className="flex justify-between gap-4">
                 <div className="flex flex-col text-sm w-full mb-4">
                   <label htmlFor="phone">Phone Number*</label>
                   <input
@@ -232,6 +254,7 @@ const RegisterForm = () => {
                     className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
                     onChange={handleChange}
                   />
+                </div>
                 </div>
 
                 <div className="flex flex-col text-sm w-full mb-4">
