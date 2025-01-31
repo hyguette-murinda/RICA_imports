@@ -36,7 +36,9 @@ const RegisterForm = () => {
     applicantCitizenship: Yup.string().required("This field is required"),
     id_doc_number: Yup.mixed().when("applicantCitizenship", {
       is: "Rwandan",
-      then: () => Yup.number().typeError("ID must be a number").required("ID number is required").positive().integer(),
+      then: () => Yup.string()
+      .matches(/^\d{16}$/, "ID number must be 16 digits ")
+      .required("ID number is required"),
       otherwise: () => Yup.mixed().notRequired(),
     }),
   
@@ -367,6 +369,18 @@ const RegisterForm = () => {
                       <option value="other">Other</option>
                     </select>
                   </div>
+                  {formData.purposeOfImport === "other" && (
+                    <div className="flex flex-col text-sm w-full mb-4">
+                     <label htmlFor="specifyPurposeOfImport">Specify purpose of importation*</label>
+                     <input
+                      type="text"
+                      name="specifyPurposeOfImport"
+                      value={formData.specifyPurposeOfImport || ""}
+                      className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
+                      onChange={handleChange}
+    />
+  </div>
+)}
 
                   <div className="flex flex-col text-sm w-full mb-4">
                     <label htmlFor="prodCategory">Product Category*</label>
