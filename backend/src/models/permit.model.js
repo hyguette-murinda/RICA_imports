@@ -12,7 +12,7 @@ const PermitSchema = new mongoose.Schema({
   location: String,
   businessType: String,
   companyName: String,
-  tinNumber: Number,
+  tinNumber: String,
   registrationDate: Date,
   businessLocation: String,
   purposeOfImport: String,
