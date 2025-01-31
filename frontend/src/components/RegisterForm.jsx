@@ -5,31 +5,26 @@ import axios from "axios";
 import { message } from "antd";
 import { CountryDropdown } from "react-country-region-selector";
 const districts = [
-  "Kigali",
   "Gasabo",
   "Kicukiro",
   "Nyarugenge",
-  "Northern Province",
   "Burera",
   "Gakenke",
   "Gicumbi",
   "Musanze",
   "Rulindo",
-  "Southern Province",
   "Gisagara",
   "Huye",
   "Kamonyi",
   "Muhanga",
   "Nyanza",
   "Nyaruguru",
-  "Eastern Province",
   "Bugesera",
   "Gatsibo",
   "Kayonza",
   "Kirehe",
   "Ngoma",
   "Nyagatare",
-  "Western Province",
   "Bugarama",
   "Karongi",
   "Ngororero",
@@ -90,13 +85,13 @@ const RegisterForm = () => {
     location: Yup.string().required("Location is required"),
     businessType: Yup.string().required("Business type is required"),
     companyName: Yup.string().required("Company name is required"),
-    tinNumber: Yup.number().required("TIN number is required").positive().integer(),
+    tinNumber: Yup.string().matches(/^\d{9}$/, "TIN number must be 9 digits ").required("ID number is required"),
     registrationDate: Yup.date().required("Registration date is required"),
     businessLocation: Yup.string().required("Business location is required"),
     purposeOfImport: Yup.string().required("Purpose of import is required"),
     prodCategory: Yup.string().required("Product category is required"),
     productName: Yup.string().required("Product name is required"),
-    weight: Yup.string().required("Weight is required"),
+    weight: Yup.string().notRequired(),
     descriptions: Yup.string(),
     unitOfMeasure: Yup.string().required("Unit of measure is required"),
     quantity: Yup.string().required("Quantity is required"),
@@ -188,14 +183,14 @@ const RegisterForm = () => {
   return (
     <div className="">
       <div className="bg-white">
-        <h1 className="bold pb-4 text-[#800000] font-bold text-2xl">RICA Import Permit</h1>
+        <h1 className="bold pb-4 text-[#3b68db] font-bold text-2xl m-4 text-center">RICA Import Permit</h1>
         <div className="">
           <form className="p-8 w-[80%] flex flex-col gap-y-3" onSubmit={handleSubmit}>
             {/* Business Owner Details */}
             <div className="w-full border border-gray-300 rounded-md overflow-hidden">
               <div className="bg-blue-500 text-white text-sm font-semibold p-3">Business Owner Details</div>
               <div className="p-4">
-                <h2 className="font-bold p-2">Business Owen Details</h2>
+                <h2 className="font-bold p-2">Business Owner Details</h2>
                 <div className="text-sm w-full mb-4">
                   <label htmlFor="applicantCitizenship">Applicant Citizenship*</label>
                   <select
@@ -230,7 +225,6 @@ const RegisterForm = () => {
                     <input
                       type="text"
                       name="passport"
-                      placeholder="Enter Passport Number"
                       value={formData.passport}
                       className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
                       onChange={handleChange}
@@ -376,7 +370,7 @@ const RegisterForm = () => {
                 <div className="flex flex-col text-sm w-full mb-4">
                   <label htmlFor="businessLocation">Business Address*</label>
                   <select
-        name="location"
+        name="businessLocation"
         value={formData.businessLocation}
         className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
         onChange={handleChange}
@@ -406,7 +400,7 @@ const RegisterForm = () => {
                       className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
                       onChange={handleChange}
                     >
-                      <option value="" disabled>Select Purpose</option>
+                      <option value="" disabled>The purpose of importation</option>
                       <option value="directSale">Direct Sale</option>
                       <option value="personalUse">Personal Use</option>
                       <option value="trialUse">Trial Use</option>
@@ -493,15 +487,14 @@ const RegisterForm = () => {
                   </div>
 
                   <div className="flex flex-col text-sm w-full mb-4">
-                    <label htmlFor="descriptions">Description of Products</label>
-                    <input
-                      type="text"
-                      name="descriptions"
-                      placeholder="Enter Description"
-                      value={formData.descriptions}
-                      className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
-                      onChange={handleChange}
-                    />
+                    <label htmlFor="descriptions">Descriptions*</label>
+                  <textarea
+                     name="descriptions"
+                     value={formData.descriptions}
+                     className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
+                     onChange={handleChange}
+                      rows={4}
+                    ></textarea>
                   </div>
                 </div>
               </div>
