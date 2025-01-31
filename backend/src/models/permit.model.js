@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const UserSchema = new mongoose.Schema({
+const PermitSchema = new mongoose.Schema({
   applicantCitizenship: String,
   id_doc_number: Number,
   passport: String,
@@ -25,4 +25,4 @@ const UserSchema = new mongoose.Schema({
   quantity: String,
 });
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model('Permit', PermitSchema);

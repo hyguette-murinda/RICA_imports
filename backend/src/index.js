@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import router from './routes/user.routes.js';
+import router from './routes/permit.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/ricaDB', {
   .catch((err) => console.log(err));
 
 // Routes
-app.use('/users', router);
+app.use('/permits', router);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

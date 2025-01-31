@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "A Restful web application for library management",
-        "title": "Library Management System",
+        "description": "A Restful web application for Permit management",
+        "title": "Permit Management System",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "IMFURA MURINDA Hyguette",
@@ -11,12 +11,8 @@
         "version": "1.0.0"
     },
     "tags": [{
-            "name": "USER OPERATIONS",
-            "description": "Operations on users"
-        },
-        {
-            "name": "BOOK OPERATIONS",
-            "description": "Operations on books"
+            "name": "Permit OPERATIONS",
+            "description": "Operations on permits"
         }
     ],
     "security": [{
@@ -32,56 +28,12 @@
         }
     },
     "paths": {
-        "/users/login": {
-            "post": {
-                "tags": [
-                    "USER OPERATIONS"
-                ],
-                "summary": "Login",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "type": "object",
-                    "consumes": "application/json",
-                    "properties": {
-                        "email": {
-                            "type": "string",
-                            "required": "true"
-                        },
-                        "password": {
-                            "type": "string",
-                            "required": "true"
-                        }
-                    }
-                }],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "201": {
-                        "description": "Created"
-                    },
-                    "400": {
-                        "description": "Invalid data"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
         "/users/register": {
             "post": {
                 "tags": [
                     "USER OPERATIONS"
                 ],
-                "summary": "register user",
+                "summary": "register permit",
                 "consumes": [
                     "application/json"
                 ],
@@ -107,85 +59,6 @@
                             "required": "true"
                         },
                         "password": {
-                            "type": "string",
-                            "required": "true"
-                        }
-                    }
-                }],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "201": {
-                        "description": "Created"
-                    },
-                    "400": {
-                        "description": "Invalid data"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
-        "/books/all": {
-            "get": {
-                "tags": [
-                    "BOOK OPERATIONS"
-                ],
-                "summary": "Get all books",
-                "consumes": [],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    }
-                }
-                
-                
-            }
-        },
-        "/books/register": {
-            "post": {
-                "tags": [
-                    "BOOK OPERATIONS"
-                ],
-                "summary": "Register book",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "type": "object",
-                    "consumes": "application/json",
-                    "properties": {
-                        "book_id": {
-                            "type": "string",
-                            "required": "true"
-                        },
-                        "name": {
-                            "type": "string",
-                            "required": "true"
-                        },
-                        "author": {
-                            "type": "string",
-                            "required": "true"
-                        },
-                        "publisher": {
-                            "type": "string",
-                            "required": "true"
-                        },
-                        "publicationYear": {
-                            "type": "string",
-                            "required": "true"
-                        },
-                        "subject": {
                             "type": "string",
                             "required": "true"
                         }
