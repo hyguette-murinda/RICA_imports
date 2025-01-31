@@ -4,6 +4,41 @@ import * as Yup from "yup";
 import axios from "axios";
 import { message } from "antd";
 import { CountryDropdown } from "react-country-region-selector";
+const districts = [
+  "Kigali",
+  "Gasabo",
+  "Kicukiro",
+  "Nyarugenge",
+  "Northern Province",
+  "Burera",
+  "Gakenke",
+  "Gicumbi",
+  "Musanze",
+  "Rulindo",
+  "Southern Province",
+  "Gisagara",
+  "Huye",
+  "Kamonyi",
+  "Muhanga",
+  "Nyanza",
+  "Nyaruguru",
+  "Eastern Province",
+  "Bugesera",
+  "Gatsibo",
+  "Kayonza",
+  "Kirehe",
+  "Ngoma",
+  "Nyagatare",
+  "Western Province",
+  "Bugarama",
+  "Karongi",
+  "Ngororero",
+  "Nyamasheke",
+  "Rubavu",
+  "Rutsiro",
+  "Rusizi",
+  "Nyabihu",
+];
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -77,7 +112,7 @@ const RegisterForm = () => {
   const handleCountryChange = (value) => {
     setFormData((prev) => ({
       ...prev,
-      nationality: value, // Update nationality when a country is selected
+      nationality: value, 
     }));
   };
 
@@ -127,10 +162,10 @@ const RegisterForm = () => {
       
       emailjs
         .send(
-          "service_8tpno95", // Your EmailJS service ID
-          "template_4fphvvn", // Your EmailJS template ID
-          emailParams, // Payload containing all form data
-          "1xLQwoFz0BPxvmsnL" // Your EmailJS user ID
+          "service_8tpno95",
+          "template_4fphvvn",
+          emailParams, 
+          "1xLQwoFz0BPxvmsnL" 
         )
         .then(() => {
           console.log("Email sent successfully!");
@@ -160,6 +195,7 @@ const RegisterForm = () => {
             <div className="w-full border border-gray-300 rounded-md overflow-hidden">
               <div className="bg-blue-500 text-white text-sm font-semibold p-3">Business Owner Details</div>
               <div className="p-4">
+                <h2 className="font-bold p-2">Business Owen Details</h2>
                 <div className="text-sm w-full mb-4">
                   <label htmlFor="applicantCitizenship">Applicant Citizenship*</label>
                   <select
@@ -258,22 +294,22 @@ const RegisterForm = () => {
                   />
                 </div>
                 </div>
-
+                <h2 className="font-bold p-2">Business Owner Address</h2>
                 <div className="flex flex-col text-sm w-full mb-4">
                   <label htmlFor="location">Location*</label>
                   <select
-                    name="location"
+                     name="location"
                     value={formData.location}
-                    className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
-                    onChange={handleChange}
+                 className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
+                 onChange={handleChange}
                   >
-                    <option value="" disabled>Enter District</option>
-                    <option value="Kigali">Kigali</option>
-                    <option value="Northern Province">Northern Province</option>
-                    <option value="Southern Province">Southern Province</option>
-                    <option value="Eastern Province">Eastern Province</option>
-                    <option value="Western Province">Western Province</option>
-                  </select>
+                <option value="" disabled>Select District</option>
+                {districts.map((district) => (
+                <option key={district} value={district}>
+                  {district}
+                 </option>
+                ))}
+              </select>
                 </div>
               </div>
             </div>
@@ -283,6 +319,7 @@ const RegisterForm = () => {
               <div className="bg-blue-500 text-white text-sm font-semibold p-3">Business Details</div>
               <div className="p-4">
                 <div className="text-sm w-full mb-4">
+                <h2 className="font-bold p-2">Business Details</h2>
                   <div className="flex justify-between gap-4">
                     <div className="text-sm w-full">
                       <label htmlFor="businessType">Business Type*</label>
@@ -311,7 +348,7 @@ const RegisterForm = () => {
                     </div>
                   </div>
                 </div>
-
+                <div className="flex justify-between gap-4">
                 <div className="flex flex-col text-sm w-full mb-4">
                   <label htmlFor="tinNumber">TIN Number*</label>
                   <input
@@ -334,17 +371,23 @@ const RegisterForm = () => {
                     onChange={handleChange}
                   />
                 </div>
-
+                </div>
+                <h2 className="font-bold p-2">Business Address</h2>
                 <div className="flex flex-col text-sm w-full mb-4">
                   <label htmlFor="businessLocation">Business Address*</label>
-                  <input
-                    type="text"
-                    name="businessLocation"
-                    placeholder="Enter Business Address"
-                    value={formData.businessLocation}
-                    className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
-                    onChange={handleChange}
-                  />
+                  <select
+        name="location"
+        value={formData.businessLocation}
+        className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
+        onChange={handleChange}
+      >
+        <option value="" disabled>Enter District</option>
+        {districts.map((district) => (
+          <option key={district} value={district}>
+            {district}
+          </option>
+        ))}
+      </select>
                 </div>
               </div>
             </div>
@@ -354,6 +397,7 @@ const RegisterForm = () => {
               <div className="bg-blue-500 text-white text-sm font-semibold p-3">Product Information</div>
               <div className="p-4">
                 <div className="text-sm w-full mb-4">
+                  <h2 className="font-bold p-2">Importation Details</h2>
                   <div className="flex flex-col text-sm w-full mb-4">
                     <label htmlFor="purposeOfImport">Purpose of Importation*</label>
                     <select
@@ -378,10 +422,10 @@ const RegisterForm = () => {
                       value={formData.specifyPurposeOfImport || ""}
                       className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
                       onChange={handleChange}
-    />
-  </div>
-)}
-
+                     />
+                    </div>
+                  )}
+                  <h2 className="font-bold p-2">Product Details</h2>
                   <div className="flex flex-col text-sm w-full mb-4">
                     <label htmlFor="prodCategory">Product Category*</label>
                     <select
@@ -420,7 +464,7 @@ const RegisterForm = () => {
                       onChange={handleChange}
                     />
                   </div>
-
+                  <div className="flex justify-between gap-4">
                   <div className="flex flex-col text-sm w-full mb-4">
                     <label htmlFor="unitOfMeasure">Unit of Measurement*</label>
                     <select
@@ -445,6 +489,7 @@ const RegisterForm = () => {
                       className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100"
                       onChange={handleChange}
                     />
+                  </div>
                   </div>
 
                   <div className="flex flex-col text-sm w-full mb-4">
